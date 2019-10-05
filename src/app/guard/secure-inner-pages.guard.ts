@@ -19,7 +19,7 @@ export class SecureInnerPagesGuard implements CanActivate {
     if(this.authService.isLoggedIn()) 
     {
       console.log("Acceso no permitido");
-      this.router.navigate(['inicio'])
+      this.router.navigate(['Principal'])
     }
 
     return true;

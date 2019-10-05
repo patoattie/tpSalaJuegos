@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { AdivinaElNumeroComponent } from './componentes/adivina-el-numero/adivina-el-numero.component';
 import { ListadoDeResultadosComponent } from './componentes/listado-de-resultados/listado-de-resultados.component';
@@ -54,7 +54,7 @@ import { CabeceraComponent } from './componentes/cabecera/cabecera.component';
 import { QuienSoyComponent } from './componentes/quien-soy/quien-soy.component';
 import { AnagramaComponent } from './componentes/anagrama/anagrama.component';
 import { ListadoDePaisesComponent } from './componentes/listado-de-paises/listado-de-paises.component';
-import { MapaDeGoogleComponent } from './componentes/mapa-de-google/mapa-de-google.component'
+//import { MapaDeGoogleComponent } from './componentes/mapa-de-google/mapa-de-google.component'
 import { AgmCoreModule } from '@agm/core';
 import { InputJugadoresComponent } from './componentes/input-jugadores/input-jugadores.component';
 import { SexoPipe } from './pipes/sexo.pipe';
@@ -81,7 +81,7 @@ import { AuthService } from './servicios/auth.service';
     QuienSoyComponent,
     AnagramaComponent,
     ListadoDePaisesComponent,
-    MapaDeGoogleComponent,
+//    MapaDeGoogleComponent,
     JugadoresListadoComponent,
     InputJugadoresComponent,
     SexoPipe
@@ -89,11 +89,12 @@ import { AuthService } from './servicios/auth.service';
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     RuteandoModule,
     HttpClientModule,
-    /*AgmCoreModule.forRoot({
+/*    AgmCoreModule.forRoot({
       apiKey: 'AIzaSyB6f8x4IjRlesQ3oETc6BXYQHVRTOlY3Ys'
-    })*/
+    }),*/
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
     AngularFireAuthModule
@@ -107,6 +108,7 @@ import { AuthService } from './servicios/auth.service';
     PaisesService,
     ArchivosJugadoresService,
     JugadoresService,
+    FormBuilder,
     AuthService,
     { provide: FirestoreSettingsToken, useValue: {} }
   ],
