@@ -1,12 +1,14 @@
-import { log } from 'util';
+
+import {throwError as observableThrowError,  Observable } from 'rxjs';
+
+import {catchError, map} from 'rxjs/operators';
+//import { log } from 'util';
 import { Injectable } from '@angular/core';
 
-import { HttpClient, HttpResponse } from '@angular/common/http/http';
+import { HttpClient } from '@angular/common/http';
 
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/toPromise';
+
+
 
 @Injectable()
 export class MiHttpService {
@@ -32,11 +34,11 @@ export class MiHttpService {
     });
   }
 
-  public httpGetO ( url: string): Observable<Response>
+  public httpGetO ( url: string): Observable<Promise<any> | Response>
   {
-    return this.http.get( url )
-      .map( ( res: Response ) => res.json())
-      .catch( ( err: any ) => Observable.throw(err.json().error || 'Server error'));
+    return this.http.get( url ).pipe(
+      map( ( res: Response ) => res.json()),
+      catchError( ( err: any ) => observableThrowError(err.json().error || 'Server error')),);
   }
 
 
