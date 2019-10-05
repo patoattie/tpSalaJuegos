@@ -8,6 +8,11 @@ import { LoginComponent } from './componentes/login/login.component';
 //  import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
 
+import { AngularFireModule } from '@angular/fire';
+import { environment } from '../environments/environment';
+import { AngularFirestoreModule, FirestoreSettingsToken } from '@angular/fire/firestore';
+import { AngularFireAuthModule } from "@angular/fire/auth";
+
 // import { AccordionModule } from 'ngx-bootstrap';
 // agrego las clases para utilizar ruteo
 import { RouterModule, Routes } from '@angular/router';
@@ -53,6 +58,7 @@ import { MapaDeGoogleComponent } from './componentes/mapa-de-google/mapa-de-goog
 import { AgmCoreModule } from '@agm/core';
 import { InputJugadoresComponent } from './componentes/input-jugadores/input-jugadores.component';
 import { SexoPipe } from './pipes/sexo.pipe';
+import { AuthService } from './servicios/auth.service';
 
 @NgModule({
   declarations: [
@@ -85,14 +91,25 @@ import { SexoPipe } from './pipes/sexo.pipe';
     FormsModule,
     RuteandoModule,
     HttpClientModule,
-    AgmCoreModule.forRoot({
+    /*AgmCoreModule.forRoot({
       apiKey: 'AIzaSyB6f8x4IjRlesQ3oETc6BXYQHVRTOlY3Ys'
-    })
+    })*/
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFirestoreModule,
+    AngularFireAuthModule
     // NgbModule.forRoot(MiRuteo),
     // importo el ruteo
     // RouterModule.forRoot(MiRuteo)
   ],
-  providers: [ JuegoServiceService, MiHttpService,PaisesService,ArchivosJugadoresService,JugadoresService],
+  providers: [
+    JuegoServiceService, 
+    MiHttpService,
+    PaisesService,
+    ArchivosJugadoresService,
+    JugadoresService,
+    AuthService,
+    { provide: FirestoreSettingsToken, useValue: {} }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
