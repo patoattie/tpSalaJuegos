@@ -9,25 +9,29 @@
   <strong><p>No leer lo anterior, es solo un ejemplo sacado de https://www.argentina.gob.ar/terminos-y-condiciones </p></strong>
   <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Acepto</button>
   <button  class="cancelbtn"  routerLink="/Principal" style="width:auto;">No acepto</button> -->
-  <div id="id01" class="modal">
-    <!-- <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">×</span> -->
-    <form class="modal-content animate" >
-      <div class="container">
+  <!-- <div id="id01" class="modal"> -->
+  <div>
+      <!-- <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">×</span> -->
+    <!-- <form class="modal-content animate" > -->
+    <form [formGroup]="formRegistro">
+      <div class="container-fluid">
         <label><b>Email</b></label>
-        <input type="text" placeholder="Ingresa tu correo" name="email" required>
+        <input formControlName="usuario" type="text" placeholder="Ingresa tu correo" name="email" required>
   
         <label><b>Clave</b></label>
-        <input type="password" placeholder="Aca la clave" name="psw" required>
+        <input formControlName="clave" type="password" placeholder="Aca la clave" name="psw" required>
   
         <label><b>Repita la clave</b></label>
-        <input type="password" placeholder="Aca repeti la misa clave  de arriba" name="psw-repeat" required>
+        <input formControlName="confirmaClave" type="password" placeholder="Aca repeti la misa clave  de arriba" name="psw-repeat" required>
         <!-- <input type="checkbox" checked="checked">Recordar mis datos
         <p>creando la cuenta aceptando los<a  onclick="document.getElementById('id01').style.display='none'"  >Terminos y condiciones</a>.</p> -->
   
         <div class="clearfix">
           <!-- <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Me arrepenti</button> -->
-          <button type="button" routerLink="/Principal" class="cancelbtn">Me arrepenti</button>
-          <button type="submit" class="signupbtn">Registrarme</button>
+          <button type="button" (click)="goBack()" class="cancelbtn">Me arrepenti</button>
+          <button type="button" (click)="registrar()" class="signupbtn">Registrarme</button>
+          <p *ngIf="getErrorDatos()" style="color: #ea6153;">Por favor verificá que hayas ingresado un E-Mail válido y una Clave.</p>
+          <p *ngIf="getErrorClave()" style="color: #ea6153;">La confirmación de la clave no coincide con la clave ingresada.</p>
         </div>
       </div>
     </form>
