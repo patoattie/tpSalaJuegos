@@ -1,12 +1,12 @@
-body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
+/*body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 
 body, html {
   height: 100%;
   line-height: 1.8;
-}
+}*/
 
 /* Full height image header */
-.bgimg-1 {
+/*.bgimg-1 {
   background-position: center;
   background-size: cover;
   background-image: url("/assets/imagenes/mac.jpg");
@@ -15,4 +15,42 @@ body, html {
 
 .w3-bar .w3-button {
   padding: 16px;
+}
+*/
+
+.container-fluid
+{
+    background-image: url("/assets/imagenes/cabecera.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+}
+
+.hero-text 
+{
+    text-align: center;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #3E06B0;
+}
+    
+.hero-text a 
+{
+    border: none;
+    outline: 0;
+    display: inline-block;
+    padding: 10px 25px;
+    color: black;
+    background-color: #ddd;
+    text-align: center;
+    cursor: pointer;
+}
+    
+.hero-text a:hover 
+{
+    background-color: #555;
+    color: white;
 }
