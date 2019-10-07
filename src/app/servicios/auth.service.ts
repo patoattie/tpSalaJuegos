@@ -12,6 +12,7 @@ import { Usuario } from "../interfaces/usuario";
 })
 export class AuthService {
   userData: Usuario; // Save logged in user data
+  private error: string;
 
   constructor(
     public afAuth: AngularFireAuth, // Inject Firebase auth service
@@ -38,13 +39,14 @@ export class AuthService {
     }
 
   // Sign in with email/password
-  public SignIn(email, password): Promise<any>
+  public SignIn(email: string, password: string): Promise<any>
   {
     return this.afAuth.auth.signInWithEmailAndPassword(email, password)
       .then((result) => 
       {
         this.SetUserData(result.user);
         console.log("Login OK");
+        this.error = '';
 
         this.ngZone.run(() => 
         {
@@ -54,11 +56,12 @@ export class AuthService {
       .catch((error) => 
       {
         console.log(error.code);
+        this.error = error.code;
       })
   }
 
   // Sign up with email/password
-  public SignUp(email, password) {
+  public SignUp(email: string, password: string) {
     return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
       .then((result) => 
       {
@@ -67,6 +70,7 @@ export class AuthService {
         //this.SendVerificationMail();
         this.SetUserData(result.user);
         console.log("Login OK");
+        this.error = '';
 
         this.ngZone.run(() => 
         {
@@ -76,6 +80,7 @@ export class AuthService {
       .catch((error) => 
       {
         console.log(error.code);
+        this.error = error.code;
       })
   }
 
@@ -158,5 +163,28 @@ export class AuthService {
   public getUserData(): Usuario 
   {
     return JSON.parse(localStorage.getItem('user'));
+  }
+
+  public getError(): string
+  {
+    let retorno: string;
+
+    switch(this.error)
+    {
+      case 'auth/wrong-password':
+        retorno = 'E-Mail inexistente o Clave incorrecta';
+        break;
+      case 'auth/email-already-in-use':
+        retorno = 'El jugador ya se encuentra registrado';
+        break;
+      case '':
+        retorno = '';
+        break;
+      default:
+        retorno = this.error;
+        break;
+    }
+
+    return retorno;
   }
 }

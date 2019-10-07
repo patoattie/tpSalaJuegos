@@ -40,6 +40,7 @@ export class RegistroComponent implements OnInit {
     this.errorDatos = false;
     this.errorClave = false;
     this.enEspera = false;
+    this.formRegistro.setValue({usuario: '', clave: '', confirmaClave: '', sexo: 'M', cuit: ''});
   }
 
   public getOk(): boolean
