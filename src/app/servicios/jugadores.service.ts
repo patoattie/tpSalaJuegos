@@ -46,12 +46,17 @@ export class JugadoresService {
 
   addJugador(jugador: Jugador): Promise<DocumentReference> 
   {
-    return this.jugadorCollection.add(jugador);
+    return this.jugadorCollection.add({
+      idCollection: jugador.idCollection,
+      usuario: jugador.usuario,
+      sexo: jugador.sexo,
+      cuit: jugador.cuit
+    });
   }
  
   updateJugador(jugador: Jugador): Promise<void> 
   {
-    return this.jugadorCollection.doc(jugador.idCollection).update({ id: jugador.id, correo: jugador.usuario, cuit: jugador.cuit, sexo: jugador.sexo });
+    return this.jugadorCollection.doc(jugador.idCollection).update({ usuario: jugador.usuario, cuit: jugador.cuit, sexo: jugador.sexo });
   }
  
   deleteJugador(idCollection: string): Promise<void> 

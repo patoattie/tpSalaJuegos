@@ -4,6 +4,9 @@ import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import { AuthService } from '../../servicios/auth.service';
 import { Location } from '@angular/common';
+import { JugadoresService } from '../../servicios/jugadores.service';
+import { Jugador } from '../../clases/jugador';
+import { ESexo } from '../../enums/e-sexo.enum';
 
 @Component({
   selector: 'app-registro',
@@ -18,7 +21,12 @@ export class RegistroComponent implements OnInit {
   private errorClave: boolean; //Error en el formato de datos de correo o clave
   private enEspera: boolean; //Muestra u oculta el spinner
 
-  constructor(private miConstructor: FormBuilder, public authService: AuthService, private location: Location)
+  constructor(
+    private miConstructor: FormBuilder, 
+    public authService: AuthService, 
+    private location: Location,
+    private jugadoresService: JugadoresService
+    )
   {
     //email = new FormControl('', [Validators.email, Validators.required]);
     this.formRegistro = this.miConstructor.group(
@@ -27,7 +35,7 @@ export class RegistroComponent implements OnInit {
       clave: ['', Validators.compose([Validators.required, Validators.minLength(6)])],
       confirmaClave: ['', Validators.compose([Validators.required, Validators.minLength(6)])],
       sexo: ['', Validators.compose([])],
-      cuit: ['', Validators.compose([])]
+      cuit: ['', Validators.compose([Validators.maxLength(11), Validators.minLength(11)])]
     });
   }
 
@@ -40,8 +48,10 @@ export class RegistroComponent implements OnInit {
     this.errorDatos = false;
     this.errorClave = false;
     this.enEspera = false;
-    this.formRegistro.setValue({usuario: '', clave: '', confirmaClave: '', sexo: 'M', cuit: ''});
+    this.formRegistro.setValue({usuario: '', clave: '', confirmaClave: '', sexo: ESexo.masculino, cuit: ''});
   }
+
+  get eSexo() { return ESexo; }
 
   public getOk(): boolean
   {
@@ -83,10 +93,10 @@ export class RegistroComponent implements OnInit {
         this.ok = usuarioValido;
         this.errorDatos = false;
         this.errorClave = false;
-        /*if(usuarioValido)
+        if(usuarioValido)
         {
-          this.completarUsuario('blanquear');
-        }*/
+          this.jugadoresService.addJugador(new Jugador(this.formRegistro.value.usuario, this.formRegistro.value.cuit));
+        }
       }
       else //El usuario no confirmó bien la clave
       {
