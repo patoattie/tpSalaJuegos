@@ -26,15 +26,16 @@
     <!-- <form action="return true;"> -->
     <form [formGroup]="formLogin">
       <div class="imgcontainer">
-        <img src="./assets/imagenes/login.png" alt="Avatar" class="avatar" max-width="104" >
+        <img src="./assets/imagenes/login.png" alt="Avatar" class="avatar" max-width="104" (click)="completarUsuario()">
       </div>
 
       <div class="container">
         <label><b>Usuario</b></label>
-        <input formControlName="usuario" type="text" placeholder="Usuario"  [(ngModel)]="usuario"  name="uname" required>
+        <!-- <input type="text" placeholder="Usuario"  [(ngModel)]="usuario"  name="uname" required> -->
+        <input formControlName="usuario" type="text" placeholder="Usuario" name="uname" required>
 
         <label><b>Clave</b></label>
-        <input formControlName="clave" type="password" placeholder="Clave"  [(ngModel)]="clave" name="psw" required>
+        <input formControlName="clave" type="password" placeholder="Clave" name="psw" required>
             
         <!-- <button *ngIf="logeando"  (click)="MoverBarraDeProgreso()" >Ingresar</button>
        

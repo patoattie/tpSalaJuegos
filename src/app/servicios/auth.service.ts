@@ -100,7 +100,8 @@ export class AuthService {
   // Returns true when user is looged in and email is verified
   /*get*/public  isLoggedIn(): boolean {
     //const user = JSON.parse(localStorage.getItem('user'));
-    return this.afAuth.auth.currentUser !== null;
+    //return this.afAuth.auth.currentUser !== null;
+    return JSON.parse(localStorage.getItem('user')) !== null;
   }
 
   // Sign in with Google

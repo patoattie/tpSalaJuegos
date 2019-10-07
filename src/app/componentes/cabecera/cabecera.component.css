@@ -33,3 +33,11 @@ cursor: pointer;
 background-color: #555;
 color: white;
 }*/
+
+a {
+    cursor: pointer;
+}
+
+a:hover {
+    color: white;
+}

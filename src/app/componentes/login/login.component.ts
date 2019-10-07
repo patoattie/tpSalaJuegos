@@ -94,7 +94,12 @@ export class LoginComponent implements OnInit {
     this.enEspera = false; //Oculto el spinner
   }
 
-/*  Entrar() {
+  public completarUsuario(): void
+  {
+    this.formLogin.setValue({usuario: 'admin@admin.com', clave: '111111'});
+  }
+
+  /*  Entrar() {
     //if (this.usuario === 'admin' && this.clave === 'admin') {
       this.router.navigate(['/Principal']);
     //}

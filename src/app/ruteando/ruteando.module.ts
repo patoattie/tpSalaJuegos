@@ -30,7 +30,9 @@ import { SecureInnerPagesGuard } from "../guard/secure-inner-pages.guard";
 // declaro donde quiero que se dirija
 const MiRuteo = [
 {path: 'Jugadores' , component: JugadoresListadoComponent, canActivate: [AuthGuard]},
-{path: '' , component: InicioComponent, canActivate: [SecureInnerPagesGuard]},
+//{path: '' , component: InicioComponent, canActivate: [SecureInnerPagesGuard]},
+{path: '', redirectTo: 'Inicio', pathMatch: 'full', canActivate: [SecureInnerPagesGuard]},
+{path: 'Inicio' , component: InicioComponent, canActivate: [SecureInnerPagesGuard]},
 {path: 'Login' , component: LoginComponent, canActivate: [SecureInnerPagesGuard]},
 //{path: 'Mapa' , component: MapaDeGoogleComponent},
 {path: 'QuienSoy' , component: QuienSoyComponent, canActivate: [AuthGuard]},
