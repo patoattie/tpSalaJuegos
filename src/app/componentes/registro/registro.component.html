@@ -26,6 +26,18 @@
         <!-- <input type="checkbox" checked="checked">Recordar mis datos
         <p>creando la cuenta aceptando los<a  onclick="document.getElementById('id01').style.display='none'"  >Terminos y condiciones</a>.</p> -->
   
+        <label class="container">Masculino
+          <input formControlName="sexo" type="radio" checked="checked" name="sexo">
+          <span class="checkmark"></span>
+        </label>
+        <label class="container">Femenino
+          <input formControlName="sexo" type="radio" name="sexo">
+          <span class="checkmark"></span>
+        </label>
+                  
+        <label><b>Cuit</b></label>
+        <input formControlName="cuit" type="text" placeholder="Ingresa tu CUIT" name="email" required>
+
         <div class="clearfix">
           <!-- <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Me arrepenti</button> -->
           <button type="button" (click)="goBack()" class="cancelbtn">Me arrepenti</button>
