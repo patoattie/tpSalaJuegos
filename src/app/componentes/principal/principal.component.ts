@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../servicios/auth.service';
 
 
 @Component({
@@ -11,7 +12,7 @@ export class PrincipalComponent implements OnInit {
     isFirstOpen: true,
     isFirstDisabled: false
   };
-  constructor() {  }
+  constructor(public authService: AuthService) {  }
 
   ngOnInit() {
   }

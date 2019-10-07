@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
-import {Subscription} from "rxjs";
-import {TimerObservable} from "rxjs/observable/TimerObservable";
+import { Subscription } from "rxjs";
+import { TimerObservable } from "rxjs/observable/TimerObservable";
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '../../servicios/auth.service';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -17,21 +20,81 @@ export class LoginComponent implements OnInit {
   progresoMensaje="esperando..."; 
   logeando=true;
   ProgresoDeAncho:string;
+  private ok: boolean; //Login OK
+  private error: boolean; //Login fallido
+  public formLogin: FormGroup;
+  private errorDatos: boolean; //Error en el formato de datos de correo o clave
+  private enEspera: boolean; //Muestra u oculta el spinner
 
   clase="progress-bar progress-bar-info progress-bar-striped ";
 
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router) {
+  constructor(private miConstructor: FormBuilder, private route: ActivatedRoute, private router: Router, public authService: AuthService) 
+    {
       this.progreso=0;
       this.ProgresoDeAncho="0%";
+      this.formLogin = this.miConstructor.group(
+      {
+        usuario: ['', Validators.compose([Validators.email, Validators.required])],
+        clave: ['', Validators.compose([Validators.required, Validators.minLength(6)])]
+      });
+    }
 
+  ngOnInit() 
+  {
+    this.ok = false;
+    this.error = false;
+    this.errorDatos = false;
+    this.enEspera = false;
   }
 
-  ngOnInit() {
+  public getOk(): boolean
+  {
+    return this.ok;
   }
 
-  Entrar() {
+  public getError(): boolean
+  {
+    return this.error;
+  }
+
+  public getErrorDatos(): boolean
+  {
+    return this.errorDatos;
+  }
+
+  public getEnEspera(): boolean
+  {
+    return this.enEspera;
+  }
+
+  public async login(): Promise<void>
+  {
+    let usuarioValido: boolean;
+    this.enEspera = true; //Muestro el spinner
+
+    if(this.formLogin.valid)
+    {
+      await this.authService.SignIn(this.formLogin.value.usuario, this.formLogin.value.clave);
+      usuarioValido = this.authService.isLoggedIn();
+      this.error = !usuarioValido;
+      this.ok = usuarioValido;
+      this.errorDatos = false;
+      /*if(usuarioValido)
+      {
+        this.completarUsuario('blanquear');
+      }*/
+    }
+    else
+    {
+      this.error = false;
+      this.ok = false;
+      this.errorDatos = true;
+    }
+
+    this.enEspera = false; //Oculto el spinner
+  }
+
+/*  Entrar() {
     //if (this.usuario === 'admin' && this.clave === 'admin') {
       this.router.navigate(['/Principal']);
     //}
@@ -76,6 +139,6 @@ export class LoginComponent implements OnInit {
       }     
     });
     //this.logeando=true;
-  }
+  }*/
 
 }

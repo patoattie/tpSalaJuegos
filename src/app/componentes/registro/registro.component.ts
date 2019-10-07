@@ -74,9 +74,7 @@ export class RegistroComponent implements OnInit {
     {
       if(this.formRegistro.value.clave === this.formRegistro.value.confirmaClave)
       {
-        //usuarioValido = this.verificarUsuario(); //Lo depreco
-        //await this.authService.SignIn(this.formRegistro.value.correo, this.formRegistro.value.clave);
-        this.authService.SignUp(this.formRegistro.value.correo, this.formRegistro.value.clave);
+        await this.authService.SignUp(this.formRegistro.value.usuario, this.formRegistro.value.clave);
         usuarioValido = this.authService.isLoggedIn();
         this.error = !usuarioValido;
         this.ok = usuarioValido;

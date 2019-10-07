@@ -23,18 +23,21 @@ import { ListadoDePaisesComponent } from '../componentes/listado-de-paises/lista
 import { JugadoresListadoComponent } from '../componentes/jugadores-listado/jugadores-listado.component';
 import { InicioComponent } from '../componentes/inicio/inicio.component';
 
+// Import canActivate guard services
+import { AuthGuard } from "../guard/auth.guard";
+import { SecureInnerPagesGuard } from "../guard/secure-inner-pages.guard";
 
 // declaro donde quiero que se dirija
 const MiRuteo = [
-{path: 'Jugadores' , component: JugadoresListadoComponent},
-{path: '' , component: InicioComponent},
-{path: 'Login' , component: LoginComponent},
+{path: 'Jugadores' , component: JugadoresListadoComponent, canActivate: [AuthGuard]},
+{path: '' , component: InicioComponent, canActivate: [SecureInnerPagesGuard]},
+{path: 'Login' , component: LoginComponent, canActivate: [SecureInnerPagesGuard]},
 //{path: 'Mapa' , component: MapaDeGoogleComponent},
-{path: 'QuienSoy' , component: QuienSoyComponent},
-{path: 'Registro' , component: RegistroComponent},
-{path: 'Principal' , component: PrincipalComponent},
-{path: 'Listado' , component: ListadoComponent},
-{path: 'Paises' , component: ListadoDePaisesComponent},
+{path: 'QuienSoy' , component: QuienSoyComponent, canActivate: [AuthGuard]},
+{path: 'Registro' , component: RegistroComponent, canActivate: [SecureInnerPagesGuard]},
+{path: 'Principal' , component: PrincipalComponent, canActivate: [AuthGuard]},
+{path: 'Listado' , component: ListadoComponent, canActivate: [AuthGuard]},
+{path: 'Paises' , component: ListadoDePaisesComponent, canActivate: [AuthGuard]},
 
 { path: 'Juegos' ,
 component: JuegosComponent ,
@@ -43,7 +46,8 @@ children:
      {path: 'Adivina' , component: AdivinaElNumeroComponent},
       {path: 'AdivinaMasListado' , component: AdivinaMasListadoComponent},
       {path: 'AgilidadaMasListado' , component: AgilidadMasListadoComponent},
-      {path: 'Agilidad' , component: AgilidadAritmeticaComponent}]
+      {path: 'Agilidad' , component: AgilidadAritmeticaComponent}],
+  canActivate: [AuthGuard]
 },
 {path: '**' , component: ErrorComponent},
 {path: 'error' , component: ErrorComponent}];

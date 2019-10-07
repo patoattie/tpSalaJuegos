@@ -145,7 +145,7 @@ export class AuthService {
     .then(() => 
     {
       localStorage.removeItem('user');
-      this.router.navigate(['login']);
+      this.router.navigate(['']);
       console.log("Logout OK");
     })
     .catch((error) => 
