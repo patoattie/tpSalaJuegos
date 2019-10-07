@@ -12,11 +12,12 @@ import { Jugador } from '../clases/jugador';
 export class JugadoresService {
 
   private jugadores: Observable<Jugador[]>;
-  private jugadorCollection: AngularFirestoreCollection<Jugador>;
+  private jugadorCollection: AngularFirestoreCollection<any>;
+  jugadorData: Jugador;
 
   constructor(private afs: AngularFirestore) 
   { 
-    this.jugadorCollection = this.afs.collection<Jugador>('Jugadores');
+    this.jugadorCollection = this.afs.collection<any>('Jugadores');
     this.jugadores = this.jugadorCollection.snapshotChanges().pipe(
       map(actions => {
         return actions.map(a => {
@@ -33,9 +34,9 @@ export class JugadoresService {
     return this.jugadores;
   }
  
-  getJugador(idCollection: string): Observable<Jugador> 
+  getJugadorPorId(idCollection: string): Observable<Jugador> 
   {
-    return this.jugadorCollection.doc<Jugador>(idCollection).valueChanges().pipe(
+    return this.jugadorCollection.doc<any>(idCollection).valueChanges().pipe(
       take(1),
       map(jugador => {
         jugador.idCollection = idCollection;
@@ -44,13 +45,27 @@ export class JugadoresService {
     );
   }
 
-  addJugador(jugador: Jugador): Promise<DocumentReference> 
+  getJugadorPorUsuario(usuario: string): Observable<Jugador> 
+  {
+    return this.jugadorCollection.doc<any>(usuario).valueChanges().pipe(
+      take(1),
+      map(jugador => {
+        jugador.usuario = usuario;
+        return jugador
+      })
+    );
+  }
+
+  addJugador(jugador: Jugador): Promise<void | DocumentReference> 
   {
     return this.jugadorCollection.add({
-      idCollection: jugador.idCollection,
       usuario: jugador.usuario,
       sexo: jugador.sexo,
       cuit: jugador.cuit
+    })
+    .then((doc) =>
+    {
+      this.SetData(doc);
     });
   }
  
@@ -62,6 +77,17 @@ export class JugadoresService {
   deleteJugador(idCollection: string): Promise<void> 
   {
     return this.jugadorCollection.doc(idCollection).delete();
+  }
+
+  public SetData(jugador: DocumentReference)
+  {
+    const jugadorRef: AngularFirestoreDocument<any> = this.afs.doc(`Jugadores/${jugador.id}`);
+    const jugadorData = {
+      idCollection: jugador.id
+    }
+    return jugadorRef.set(jugadorData, {
+      merge: true
+    })
   }
 
 

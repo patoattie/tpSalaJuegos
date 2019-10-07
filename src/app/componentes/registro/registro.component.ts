@@ -95,7 +95,7 @@ export class RegistroComponent implements OnInit {
         this.errorClave = false;
         if(usuarioValido)
         {
-          this.jugadoresService.addJugador(new Jugador(this.formRegistro.value.usuario, this.formRegistro.value.cuit));
+          await this.jugadoresService.addJugador(new Jugador(this.formRegistro.value.usuario, this.formRegistro.value.cuit, this.formRegistro.value.sexo));
         }
       }
       else //El usuario no confirmó bien la clave

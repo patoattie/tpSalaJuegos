@@ -12,7 +12,8 @@
 </div> -->
 
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-  <a class="navbar-brand" href="#">Sala de Juegos</a>
+  <a class="navbar-brand" href="#" *ngIf="!authService.isLoggedIn()">Sala de Juegos</a>
+  <a class="navbar-brand" href="#" *ngIf="authService.isLoggedIn()">{{authService.getUserData().email}}({{getDatoJugador('cuit')}}|{{getDatoJugador('sexo')}})</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
     <span class="navbar-toggler-icon"></span>
   </button>
