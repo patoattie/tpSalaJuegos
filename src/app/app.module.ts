@@ -49,6 +49,10 @@ import { SexoPipe } from './pipes/sexo.pipe';
 import { AuthService } from './servicios/auth.service';
 import { InicioComponent } from './componentes/inicio/inicio.component';
 
+//primeNG
+import {ToolbarModule} from 'primeng/toolbar';
+import {ButtonModule} from 'primeng/button';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -82,6 +86,8 @@ import { InicioComponent } from './componentes/inicio/inicio.component';
     ReactiveFormsModule,
     RuteandoModule,
     HttpClientModule,
+    ToolbarModule,
+    ButtonModule,
 /*    AgmCoreModule.forRoot({
       apiKey: 'AIzaSyB6f8x4IjRlesQ3oETc6BXYQHVRTOlY3Ys'
     }),*/

@@ -11,7 +11,7 @@
   </ul>
 </div> -->
 
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+<!-- <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
   <a class="navbar-brand" href="#" *ngIf="!authService.isLoggedIn()">Sala de Juegos</a>
   <a class="navbar-brand" href="#" *ngIf="authService.isLoggedIn()">{{authService.getUserData().email}}({{getDatoJugador('cuit')}}|{{getDatoJugador('sexo')}})</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
@@ -19,17 +19,30 @@
   </button>
   <div class="collapse navbar-collapse" id="collapsibleNavbar">
     <ul class="navbar-nav">
-      <li class="nav-item" *ngIf="!authService.isLoggedIn()">
+      <li class="nav-item" *ngIf="!authService.isLoggedIn()"> -->
         <!-- <a routerLink="/Registro"><span class="glyphicon glyphicon-user"></span>Registrarse</a> -->
-        <a class="nav-link" routerLink="/Registro">Registrarse</a>
+        <!-- <a class="nav-link" routerLink="/Registro">Registrarse</a>
       </li>
-      <li class="nav-item" *ngIf="!authService.isLoggedIn()">
+      <li class="nav-item" *ngIf="!authService.isLoggedIn()"> -->
         <!-- <a routerLink="/Login"><span class="glyphicon glyphicon-log-in"></span> Ingresar</a> -->
-        <a class="nav-link" routerLink="/Login">Ingresar</a>
+        <!-- <a class="nav-link" routerLink="/Login">Ingresar</a>
       </li>
       <li class="nav-item" *ngIf="authService.isLoggedIn()">
           <a class="nav-link" (click)="authService.SignOut()">Salir</a>
         </li>
       </ul>
   </div>  
-</nav>
+</nav> -->
+
+<p-toolbar>
+  <div class="ui-toolbar-group-left">
+    <i *ngIf="!authService.isLoggedIn()">Sala de Juegos</i>
+    <i *ngIf="authService.isLoggedIn()">{{authService.getUserData().email}}({{getDatoJugador('cuit')}}|{{getDatoJugador('sexo')}})</i>
+    <i class="ui-toolbar-separator pi pi-bars" style="vertical-align: middle"></i>
+    <button pButton type="button" label="Registrarse" icon="pi pi-plus" routerLink="/Registro" style="margin-right: .25em" *ngIf="!authService.isLoggedIn()"></button>
+    <button pButton type="button" label="Ingresar" icon="pi pi-sign-in" routerLink="/Login" *ngIf="!authService.isLoggedIn()"></button>
+  </div>
+  <div class="ui-toolbar-group-right">
+    <button pButton type="button" label="Salir" icon="pi pi-sign-out" (click)="authService.SignOut()" *ngIf="authService.isLoggedIn()"></button>
+  </div>
+</p-toolbar>
