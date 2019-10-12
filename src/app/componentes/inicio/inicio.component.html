@@ -1,15 +1,31 @@
 <app-cabecera></app-cabecera>
 
-  <div class="container-fluid full">
-    <div class="row">
-        <div class="col">
-            <div class="hero-text">
-                <h1 style="font-size:50px">Sala de Juegos</h1>
-                <p>Patricio Attie</p>
-                <a href="https://github.com/patoattie"target="_blank">en GitHub <i class="fa fa-github"></i></a>
-                <a  routerLink="/QuienSoy" >Quien Soy? <i class="fa fa-user"></i></a>
-            </div>
-        </div>
-    </div>
+<!-- <div class="container-fluid full">
+  <div class="row">
+      <div class="col">
+          <div class="hero-text">
+              <h1 style="font-size:50px">Sala de Juegos</h1>
+              <p>Patricio Attie</p>
+              <a href="https://github.com/patoattie"target="_blank">en GitHub <i class="fa fa-github"></i></a>
+              <a  routerLink="/QuienSoy" >Quien Soy? <i class="fa fa-user"></i></a>
+          </div>
+      </div>
   </div>
+</div> -->
   
+<p-card header="Sala de Juegos" [style]="{margin: '3em'}">
+  <p-header>
+    <img src="/assets/imagenes/cabecera.png" alt="Sala de Juegos">
+  </p-header>
+  <!-- <div class="hero-text"> -->
+  <div>
+    <!-- <h1 style="font-size:50px">Sala de Juegos</h1> -->
+    <label style="font-size: xx-large; display: block; text-align: center;">Patricio Attie</label>
+  </div>
+  <p-footer style="box-align: center">
+      <!-- <a href="https://github.com/patoattie" target="_blank">en GitHub <i class="fa fa-github"></i></a>
+      <a  routerLink="/QuienSoy" >Quien Soy? <i class="fa fa-user"></i></a>   -->
+      <button pButton type="button" label="en GitHub" icon="fa fa-github" style="margin-right: .5em" class="ui-button-secondary" (click)="linkExterno('https://github.com/patoattie')"></button>
+      <button pButton type="button" label="Quien Soy?" icon="fa fa-user" routerLink="/QuienSoy" style="margin-right: .5em;" class="ui-button-secondary"></button>
+    </p-footer>
+</p-card>

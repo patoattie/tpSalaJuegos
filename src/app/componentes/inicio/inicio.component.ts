@@ -12,4 +12,10 @@ export class InicioComponent implements OnInit {
   ngOnInit() {
   }
 
+  public linkExterno(url: string): void
+  {
+    //window.location.href = url;
+    window.open(url, "_blank");
+  }
+
 }

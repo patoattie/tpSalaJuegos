@@ -35,7 +35,7 @@ const MiRuteo = [
 {path: 'Inicio' , component: InicioComponent, canActivate: [SecureInnerPagesGuard]},
 {path: 'Login' , component: LoginComponent, canActivate: [SecureInnerPagesGuard]},
 //{path: 'Mapa' , component: MapaDeGoogleComponent},
-{path: 'QuienSoy' , component: QuienSoyComponent, canActivate: [AuthGuard]},
+{path: 'QuienSoy' , component: QuienSoyComponent/*, canActivate: [AuthGuard]*/},
 {path: 'Registro' , component: RegistroComponent, canActivate: [SecureInnerPagesGuard]},
 {path: 'Principal' , component: PrincipalComponent, canActivate: [AuthGuard]},
 {path: 'Listado' , component: ListadoComponent, canActivate: [AuthGuard]},

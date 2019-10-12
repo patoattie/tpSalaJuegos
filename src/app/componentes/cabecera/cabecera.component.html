@@ -36,13 +36,12 @@
 
 <p-toolbar>
   <div class="ui-toolbar-group-left">
-    <i *ngIf="!authService.isLoggedIn()">Sala de Juegos</i>
-    <i *ngIf="authService.isLoggedIn()">{{authService.getUserData().email}}({{getDatoJugador('cuit')}}|{{getDatoJugador('sexo')}})</i>
-    <i class="ui-toolbar-separator pi pi-bars" style="vertical-align: middle"></i>
-    <button pButton type="button" label="Registrarse" icon="pi pi-plus" routerLink="/Registro" style="margin-right: .25em" *ngIf="!authService.isLoggedIn()"></button>
-    <button pButton type="button" label="Ingresar" icon="pi pi-sign-in" routerLink="/Login" *ngIf="!authService.isLoggedIn()"></button>
+    <label style="margin-right: 3em; font-size: large;" *ngIf="!authService.isLoggedIn()">Sala de Juegos</label>
+    <label style="margin-right: 3em; font-size: large;" *ngIf="authService.isLoggedIn()">{{authService.getUserData().email}}({{getDatoJugador('cuit')}}|{{getDatoJugador('sexo')}})</label>
   </div>
   <div class="ui-toolbar-group-right">
-    <button pButton type="button" label="Salir" icon="pi pi-sign-out" (click)="authService.SignOut()" *ngIf="authService.isLoggedIn()"></button>
+    <button pButton type="button" label="Registrarse" icon="pi pi-user-plus" routerLink="/Registro" style="margin-right: .5em" *ngIf="!authService.isLoggedIn()"></button>
+    <button pButton type="button" label="Ingresar" icon="pi pi-sign-in" routerLink="/Login" style="margin-right: .5em" class="ui-button-success" *ngIf="!authService.isLoggedIn()"></button>
+    <button pButton type="button" label="Salir" icon="pi pi-sign-out" (click)="authService.SignOut()" style="margin-right: .5em" class="ui-button-danger" *ngIf="authService.isLoggedIn()"></button>
   </div>
 </p-toolbar>
