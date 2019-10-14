@@ -14,11 +14,31 @@ export class JugadoresService {
   private jugadores: Observable<Jugador[]>;
   private jugadorCollection: AngularFirestoreCollection<any>;
   jugadorData: Jugador;
+  private jugadoresData: Jugador[];
 
   constructor(private afs: AngularFirestore) 
   { 
-    this.jugadorCollection = this.afs.collection<any>('Jugadores');
-    this.jugadores = this.jugadorCollection.snapshotChanges().pipe(
+    this.traerTodos();
+  }
+
+  getJugadores(): Jugador[]
+  {
+    /*let retorno: Observable<Jugador[]> = JSON.parse(localStorage.getItem('jugadores'));
+
+    if(retorno == null)
+    {
+      retorno = this.jugadores;
+    }
+
+    return retorno;*/
+this.traerTodos();
+    return JSON.parse(localStorage.getItem('jugadores'));
+  }
+
+  private async traerTodos(): Promise<void>
+  {
+    this.jugadorCollection = await this.afs.collection<any>('Jugadores');
+    this.jugadores = await this.jugadorCollection.snapshotChanges().pipe(
       map(actions => {
         return actions.map(a => {
           const data = a.payload.doc.data();
@@ -27,11 +47,14 @@ export class JugadoresService {
         });
       })
     );
-  }
 
-  getJugadores(): Observable<Jugador[]> 
-  {
-    return this.jugadores;
+    await this.jugadores.subscribe(
+      jugadores2 => this.jugadoresData = jugadores2,
+      error => console.info(error)
+    );
+console.info('jugadoresData', this.jugadoresData);
+console.info('jugadores', this.jugadores);
+    localStorage.setItem('jugadores', JSON.stringify(this.jugadoresData));
   }
  
   getJugadorPorId(idCollection: string): Observable<Jugador> 

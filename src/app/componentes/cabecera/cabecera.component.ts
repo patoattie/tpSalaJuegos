@@ -17,17 +17,18 @@ export class CabeceraComponent implements OnInit {
   {
     if(this.authService.isLoggedIn())
     {
-      this.jugadoresService.getJugadores().subscribe(
+      /*this.jugadoresService.getJugadores().subscribe(
         jugadores => this.jugadores = jugadores,
         error => console.info(error)
-      );
+      );*/
+      this.jugadores = this.jugadoresService.getJugadores();
     }
   }
 
   public getDatoJugador(atributo: string): string
   {
     let retorno: string = '';
-
+console.info('jugadores', this.jugadores);
     if(this.jugadores != undefined)
     {
       this.jugadores.forEach(unJugador => 
