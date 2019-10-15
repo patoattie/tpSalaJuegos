@@ -15,12 +15,22 @@ export class JugadoresService {
 
   private jugadores: Observable<Jugador[]>;
   private jugadorCollection: AngularFirestoreCollection<any>;
+  //public jugadoresData: Jugador[];// = [];
   jugadorData: Jugador;
 
   constructor(private afs: AngularFirestore) 
   { 
-    /*this.jugadorCollection = this.afs.collection<any>('Jugadores');
-    this.jugadores = this.jugadorCollection.snapshotChanges().pipe(
+    this.getJugadores()
+    .then(resultado =>
+      {
+        this.jugadores = resultado;
+      });
+  }
+
+  async getJugadores(): Promise<any>
+  {
+    this.jugadorCollection = this.afs.collection<any>('Jugadores');
+   return await this.jugadorCollection.snapshotChanges().pipe(
       map(actions => {
         return actions.map(a => {
           const data = a.payload.doc.data();
@@ -28,27 +38,29 @@ export class JugadoresService {
           return { idCollection, ...data };
         });
       })
-    );*/
+    );
   }
 
-  async getJugadoresFirebase(): Promise<Jugador[]>
+  /*async getJugadoresFirebase(): Promise<Jugador[]>
   {
-    let jugadoresData: Jugador[] = new Array();
+    //let jugadoresData: Jugador[] = new Array();
 
-    //this.afs.firestore.collection('Jugadores').onSnapshot(coleccion => 
-    await firebase.firestore().collection('Jugadores').onSnapshot(coleccion => 
+    this.afs.firestore.collection('Jugadores').onSnapshot(coleccion => 
+    //await firebase.firestore().collection('Jugadores').onSnapshot(coleccion => 
     {
       coleccion.forEach(jugador => 
       {
-        jugadoresData.push(new Jugador(jugador.data().usuario, jugador.data().cuit, jugador.data().sexo, jugador.data().idCollection));
+        this.jugadoresData.push(new Jugador(jugador.data().usuario, jugador.data().cuit, jugador.data().sexo, jugador.data().idCollection));
+//console.log(this.jugadoresData);
       });
     });
 
-    return jugadoresData;
-  }
+//console.log(this.jugadoresData);
+    return this.jugadoresData;
+  }*/
 
-  getJugadoresLocal(): Jugador[]
-  {
+  //getJugadoresLocal(): Jugador[]
+  //{
     /*let jugadoresData: Jugador[] = JSON.parse(localStorage.getItem('jugadores'));
 
     if(jugadoresData == null)
@@ -66,16 +78,18 @@ export class JugadoresService {
     }
 
     return jugadoresData;*/
-    let jugadoresData: Jugador[] = new Array();
-    jugadoresData = JSON.parse(localStorage.getItem('jugadores'));
+    //let jugadoresData: Jugador[];// = new Array();
+    //jugadoresData = JSON.parse(localStorage.getItem('jugadores'));
 
-    if(jugadoresData == null)
+    //if(jugadoresData == null)
+    /*if(JSON.parse(localStorage.getItem('jugadores')) == null)
     {
       //jugadoresData = this.getJugadoresFirebase();
       this.getJugadoresFirebase()
       .then(datos => 
         {
-console.log(datos);
+//console.log(datos.length);
+//console.log(datos);
           localStorage.setItem('jugadores', JSON.stringify(datos));
         })
       .catch(error => 
@@ -83,15 +97,15 @@ console.log(datos);
           console.log(error);
         });
 
-      jugadoresData = JSON.parse(localStorage.getItem('jugadores'));      
+      this.jugadoresData = JSON.parse(localStorage.getItem('jugadores'));      
       //localStorage.setItem('jugadores', JSON.stringify(jugadoresData));
     }
 
-    return jugadoresData;
-  }
+    return this.jugadoresData;
+  }*/
 
-  getJugadores(): /*Observable<Jugador[]>*/Jugador[]
-  {
+  //getJugadores(): /*Observable<Jugador[]>*/Jugador[]
+  //{
     /*let retorno: Observable<Jugador[]> = JSON.parse(localStorage.getItem('jugadores'));
 
     if(retorno == null)
@@ -102,7 +116,44 @@ console.log(datos);
     return retorno;*/
 /*this.traerTodos();
     return JSON.parse(localStorage.getItem('jugadores'));*/
-    return this.getJugadoresLocal();
+    /*this.jugadores.forEach(unJugador => 
+      {
+        console.log(unJugador);
+      });*/
+    //return this.getJugadoresLocal();
+    /*let retorno: Jugador[];
+
+    this.jugadores.forEach(arrJugadores =>
+      {
+        retorno = arrJugadores;
+console.log(retorno);
+      });
+console.log(retorno);
+
+    return retorno;
+  }*/
+
+  getJugador(email: string): Jugador
+  {
+    let retorno: Jugador = JSON.parse(localStorage.getItem('jugador'));
+
+    if(retorno == null)
+    {
+        this.jugadores.forEach(arrJugadores =>
+        {
+          arrJugadores.forEach(unJugador =>
+            {
+              if(unJugador.usuario == email)
+              {
+                retorno = unJugador;
+                localStorage.setItem('jugador', JSON.stringify(retorno));
+              }
+            });
+        });
+      //retorno = JSON.parse(localStorage.getItem('jugador'));
+    }
+
+    return retorno;
   }
  
   getJugadorPorId(idCollection: string): Observable<Jugador> 
@@ -163,7 +214,7 @@ console.log(datos);
 
   public SignOut(): void 
   {
-    localStorage.removeItem('jugadores');
+    localStorage.removeItem('jugador');
   }
 
   //peticion:any;

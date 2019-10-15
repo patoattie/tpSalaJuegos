@@ -11,22 +11,44 @@ import { AngularFirestore } from '@angular/fire/firestore';
 })
 export class CabeceraComponent implements OnInit {
   public jugadores: Jugador[] = [];
+  public jugador: Jugador;
 
-  constructor(public authService: AuthService, public jugadoresService: JugadoresService, private afs: AngularFirestore) { }
+  constructor(public authService: AuthService, public jugadoresService: JugadoresService, private afs: AngularFirestore) {this.leerJugador(); }
 
   ngOnInit() 
   {
+console.log('INIT CABECERA');
     if(this.authService.isLoggedIn())
     {
+console.log('INIT CABECERA logueado');
       /*this.jugadoresService.getJugadores().subscribe(
         jugadores => this.jugadores = jugadores,
         error => console.info(error)
       );*/
-      this.jugadores = this.jugadoresService.getJugadores();
+      //this.jugadores = this.jugadoresService.getJugadores();
+      /*this.jugadoresService.getJugador(this.authService.getUserData().email)
+      .then(resultado =>
+        {
+          this.jugador = resultado;
+        });*/
+        /*this.jugador = this.jugadoresService.getJugador(this.authService.getUserData().email);
+console.log(this.jugador);*/
+       this.leerJugador();
     }
   }
 
-  public getDatoJugador(atributo: string): string
+  public async leerJugador(): Promise<void>
+  {
+    this.jugador = await this.jugadoresService.getJugador(this.authService.getUserData().email);
+    /*await this.jugadoresService.getJugador(this.authService.getUserData().email)
+    .then(resultado =>
+      {
+        this.jugador = resultado;
+      });*/
+    console.log(this.jugador);
+  }
+
+  /*public getDatoJugador(atributo: string): string
   {
     let retorno: string = '';
 //console.info('jugadores', this.jugadores);
@@ -47,6 +69,27 @@ export class CabeceraComponent implements OnInit {
           }
         }
       });
+    }
+
+    return retorno;
+  }*/
+
+  public getDatoJugador(atributo: string): string
+  {
+    let retorno: string = '';
+    //this.leerJugador();
+
+    if(this.jugador != undefined)
+    {
+      switch(atributo)
+      {
+        case 'cuit':
+          retorno = this.jugador.cuit.toString();
+          break;
+        case 'sexo':
+          retorno = this.jugador.sexo;
+          break;
+      }
     }
 
     return retorno;
