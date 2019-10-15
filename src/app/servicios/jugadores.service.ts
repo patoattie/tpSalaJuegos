@@ -3,6 +3,8 @@ import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument,
 import { map, take } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
+import * as firebase from 'firebase/app';
+
 import { Jugador } from '../clases/jugador';
 //import { ArchivosJugadoresService}from './archivos-jugadores.service'
 //@Injectable()
@@ -31,9 +33,10 @@ export class JugadoresService {
 
   async getJugadoresFirebase(): Promise<Jugador[]>
   {
-    let jugadoresData: Jugador[] = [];
+    let jugadoresData: Jugador[] = new Array();
 
-    await this.afs.firestore.collection('Jugadores').onSnapshot(coleccion => 
+    //this.afs.firestore.collection('Jugadores').onSnapshot(coleccion => 
+    await firebase.firestore().collection('Jugadores').onSnapshot(coleccion => 
     {
       coleccion.forEach(jugador => 
       {
@@ -46,7 +49,7 @@ export class JugadoresService {
 
   getJugadoresLocal(): Jugador[]
   {
-    let jugadoresData: Jugador[] = JSON.parse(localStorage.getItem('jugadores'));
+    /*let jugadoresData: Jugador[] = JSON.parse(localStorage.getItem('jugadores'));
 
     if(jugadoresData == null)
     {
@@ -60,6 +63,28 @@ export class JugadoresService {
           console.log(error);
         });
       localStorage.setItem('jugadores', JSON.stringify(jugadoresData));
+    }
+
+    return jugadoresData;*/
+    let jugadoresData: Jugador[] = new Array();
+    jugadoresData = JSON.parse(localStorage.getItem('jugadores'));
+
+    if(jugadoresData == null)
+    {
+      //jugadoresData = this.getJugadoresFirebase();
+      this.getJugadoresFirebase()
+      .then(datos => 
+        {
+console.log(datos);
+          localStorage.setItem('jugadores', JSON.stringify(datos));
+        })
+      .catch(error => 
+        {
+          console.log(error);
+        });
+
+      jugadoresData = JSON.parse(localStorage.getItem('jugadores'));      
+      //localStorage.setItem('jugadores', JSON.stringify(jugadoresData));
     }
 
     return jugadoresData;
@@ -136,6 +161,10 @@ export class JugadoresService {
     })
   }
 
+  public SignOut(): void 
+  {
+    localStorage.removeItem('jugadores');
+  }
 
   //peticion:any;
 /*  constructor( public miHttp: ArchivosJugadoresService ) {

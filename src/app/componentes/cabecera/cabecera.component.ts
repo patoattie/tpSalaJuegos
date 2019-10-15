@@ -29,7 +29,7 @@ export class CabeceraComponent implements OnInit {
   public getDatoJugador(atributo: string): string
   {
     let retorno: string = '';
-console.info('jugadores', this.jugadores);
+//console.info('jugadores', this.jugadores);
     if(this.jugadores != undefined)
     {
       this.jugadores.forEach(unJugador => 
@@ -50,5 +50,11 @@ console.info('jugadores', this.jugadores);
     }
 
     return retorno;
+  }
+
+  public salir(): void
+  {
+    this.jugadoresService.SignOut();
+    this.authService.SignOut();
   }
 }
