@@ -14,14 +14,58 @@ export class JugadoresService {
   private jugadores: Observable<Jugador[]>;
   private jugadorCollection: AngularFirestoreCollection<any>;
   jugadorData: Jugador;
-  private jugadoresData: Jugador[];
 
   constructor(private afs: AngularFirestore) 
   { 
-    this.traerTodos();
+    /*this.jugadorCollection = this.afs.collection<any>('Jugadores');
+    this.jugadores = this.jugadorCollection.snapshotChanges().pipe(
+      map(actions => {
+        return actions.map(a => {
+          const data = a.payload.doc.data();
+          const idCollection = a.payload.doc.id;
+          return { idCollection, ...data };
+        });
+      })
+    );*/
   }
 
-  getJugadores(): Jugador[]
+  async getJugadoresFirebase(): Promise<Jugador[]>
+  {
+    let jugadoresData: Jugador[] = [];
+
+    await this.afs.firestore.collection('Jugadores').onSnapshot(coleccion => 
+    {
+      coleccion.forEach(jugador => 
+      {
+        jugadoresData.push(new Jugador(jugador.data().usuario, jugador.data().cuit, jugador.data().sexo, jugador.data().idCollection));
+      });
+    });
+
+    return jugadoresData;
+  }
+
+  getJugadoresLocal(): Jugador[]
+  {
+    let jugadoresData: Jugador[] = JSON.parse(localStorage.getItem('jugadores'));
+
+    if(jugadoresData == null)
+    {
+      this.getJugadoresFirebase()
+      .then(datos => 
+        {
+          jugadoresData = datos;
+        })
+      .catch(error =>
+        {
+          console.log(error);
+        });
+      localStorage.setItem('jugadores', JSON.stringify(jugadoresData));
+    }
+
+    return jugadoresData;
+  }
+
+  getJugadores(): /*Observable<Jugador[]>*/Jugador[]
   {
     /*let retorno: Observable<Jugador[]> = JSON.parse(localStorage.getItem('jugadores'));
 
@@ -31,30 +75,9 @@ export class JugadoresService {
     }
 
     return retorno;*/
-this.traerTodos();
-    return JSON.parse(localStorage.getItem('jugadores'));
-  }
-
-  private async traerTodos(): Promise<void>
-  {
-    this.jugadorCollection = await this.afs.collection<any>('Jugadores');
-    this.jugadores = await this.jugadorCollection.snapshotChanges().pipe(
-      map(actions => {
-        return actions.map(a => {
-          const data = a.payload.doc.data();
-          const idCollection = a.payload.doc.id;
-          return { idCollection, ...data };
-        });
-      })
-    );
-
-    await this.jugadores.subscribe(
-      jugadores2 => this.jugadoresData = jugadores2,
-      error => console.info(error)
-    );
-console.info('jugadoresData', this.jugadoresData);
-console.info('jugadores', this.jugadores);
-    localStorage.setItem('jugadores', JSON.stringify(this.jugadoresData));
+/*this.traerTodos();
+    return JSON.parse(localStorage.getItem('jugadores'));*/
+    return this.getJugadoresLocal();
   }
  
   getJugadorPorId(idCollection: string): Observable<Jugador> 

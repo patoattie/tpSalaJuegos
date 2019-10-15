@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../servicios/auth.service';
 import { JugadoresService } from '../../servicios/jugadores.service';
 import { Jugador } from '../../clases/jugador';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-cabecera',
@@ -9,9 +10,9 @@ import { Jugador } from '../../clases/jugador';
   styleUrls: ['./cabecera.component.css']
 })
 export class CabeceraComponent implements OnInit {
-  public jugadores: Jugador[];
+  public jugadores: Jugador[] = [];
 
-  constructor(public authService: AuthService, public jugadoresService: JugadoresService) { }
+  constructor(public authService: AuthService, public jugadoresService: JugadoresService, private afs: AngularFirestore) { }
 
   ngOnInit() 
   {
