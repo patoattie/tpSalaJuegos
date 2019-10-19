@@ -177,6 +177,9 @@ export class AuthService {
       case 'auth/email-already-in-use':
         retorno = 'El jugador ya se encuentra registrado';
         break;
+      case 'auth/user-not-found':
+        retorno = 'E-Mail inexistente o Clave incorrecta';
+        break;
       case '':
         retorno = '';
         break;
@@ -186,5 +189,10 @@ export class AuthService {
     }
 
     return retorno;
+  }
+
+  public getUid(): string
+  {
+    return this.userData.uid;
   }
 }

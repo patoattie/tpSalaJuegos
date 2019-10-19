@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import * as firebase from 'firebase/app';
 
 import { Jugador } from '../clases/jugador';
+import { AuthService } from './auth.service';
 //import { ArchivosJugadoresService}from './archivos-jugadores.service'
 //@Injectable()
 @Injectable({
@@ -18,7 +19,7 @@ export class JugadoresService {
   //public jugadoresData: Jugador[];// = [];
   jugadorData: Jugador;
 
-  constructor(private afs: AngularFirestore) 
+  constructor(private afs: AngularFirestore, private authService: AuthService) 
   { 
     this.getJugadores()
     .then(resultado =>
@@ -205,7 +206,8 @@ console.log(retorno);
   {
     const jugadorRef: AngularFirestoreDocument<any> = this.afs.doc(`Jugadores/${jugador.id}`);
     const jugadorData = {
-      idCollection: jugador.id
+      idCollection: jugador.id,
+      uid: this.authService.getUid()
     }
     return jugadorRef.set(jugadorData, {
       merge: true
