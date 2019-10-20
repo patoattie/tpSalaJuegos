@@ -53,6 +53,7 @@ import { InicioComponent } from './componentes/inicio/inicio.component';
 import {ToolbarModule} from 'primeng/toolbar';
 import {ButtonModule} from 'primeng/button';
 import {CardModule} from 'primeng/card';
+import { InputTextModule } from "primeng/inputtext";
 
 @NgModule({
   declarations: [
@@ -90,6 +91,7 @@ import {CardModule} from 'primeng/card';
     ToolbarModule,
     ButtonModule,
     CardModule,
+    InputTextModule,
 /*    AgmCoreModule.forRoot({
       apiKey: 'AIzaSyB6f8x4IjRlesQ3oETc6BXYQHVRTOlY3Ys'
     }),*/

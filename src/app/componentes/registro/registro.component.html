@@ -23,8 +23,6 @@
   
         <label><b>Repita la clave</b></label>
         <input formControlName="confirmaClave" type="password" placeholder="Aca repeti la misa clave  de arriba" name="psw-repeat" required>
-        <!-- <input type="checkbox" checked="checked">Recordar mis datos
-        <p>creando la cuenta aceptando los<a  onclick="document.getElementById('id01').style.display='none'"  >Terminos y condiciones</a>.</p> -->
   
         <label class="container">Masculino
           <input formControlName="sexo" type="radio" checked value={{eSexo.masculino}}>
@@ -39,7 +37,6 @@
         <input formControlName="cuit" type="text" placeholder="Ingresa tu CUIT" name="email" required>
 
         <div class="clearfix">
-          <!-- <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Me arrepenti</button> -->
           <button type="button" (click)="goBack()" class="cancelbtn">Me arrepenti</button>
           <button type="button" (click)="registrar()" class="signupbtn">
             Registrarme
@@ -51,7 +48,31 @@
         </div>
       </div>
     </form>
-  </div>
+    <!-- <h3 class="first">Addons</h3>
+    <div class="ui-g ui-fluid">
+        <div class="ui-g-12 ui-md-4">
+            <div class="ui-inputgroup">
+                <span class="ui-inputgroup-addon"><i class="pi pi-user" style="line-height: 1.25;"></i></span>
+                <input type="text" pInputText placeholder="Username">         
+            </div>
+        </div>
+        
+        <div class="ui-g-12 ui-md-4">
+            <div class="ui-inputgroup">
+                <span class="ui-inputgroup-addon">$</span>
+                <input type="text" pInputText placeholder="Price">   
+                <span class="ui-inputgroup-addon">.00</span>      
+            </div>
+        </div>
+                
+        <div class="ui-g-12 ui-md-4">
+            <div class="ui-inputgroup">
+                <span class="ui-inputgroup-addon">www</span>
+                <input type="text" pInputText placeholder="Website">      
+            </div>
+        </div>
+    </div> -->
+    </div>
   
   <!-- <script>
   // Get the modal

@@ -5,6 +5,7 @@ import { Subscription } from "rxjs";
 import { TimerObservable } from "rxjs/observable/TimerObservable";
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../servicios/auth.service';
+import { JugadoresService } from '../../servicios/jugadores.service';
 
 @Component({
   selector: 'app-login',
@@ -28,7 +29,7 @@ export class LoginComponent implements OnInit {
 
   clase="progress-bar progress-bar-info progress-bar-striped ";
 
-  constructor(private miConstructor: FormBuilder, private route: ActivatedRoute, private router: Router, public authService: AuthService) 
+  constructor(private miConstructor: FormBuilder, private route: ActivatedRoute, private router: Router, public authService: AuthService, private jugadoresService: JugadoresService) 
     {
       this.progreso=0;
       this.ProgresoDeAncho="0%";
@@ -79,10 +80,11 @@ export class LoginComponent implements OnInit {
       this.error = !usuarioValido;
       this.ok = usuarioValido;
       this.errorDatos = false;
-      /*if(usuarioValido)
+      if(usuarioValido)
       {
-        this.completarUsuario('blanquear');
-      }*/
+        //this.completarUsuario('blanquear');
+       await this.jugadoresService.getJugador(this.formLogin.value.usuario);
+      }
     }
     else
     {

@@ -17,10 +17,8 @@ export class CabeceraComponent implements OnInit {
 
   ngOnInit() 
   {
-console.log('INIT CABECERA');
     if(this.authService.isLoggedIn())
     {
-console.log('INIT CABECERA logueado');
       /*this.jugadoresService.getJugadores().subscribe(
         jugadores => this.jugadores = jugadores,
         error => console.info(error)
@@ -32,20 +30,27 @@ console.log('INIT CABECERA logueado');
           this.jugador = resultado;
         });*/
         /*this.jugador = this.jugadoresService.getJugador(this.authService.getUserData().email);
-console.log(this.jugador);*/
+      console.log(this.jugador);*/
        this.leerJugador();
     }
   }
 
   public async leerJugador(): Promise<void>
   {
-    this.jugador = await this.jugadoresService.getJugador(this.authService.getUserData().email);
-    /*await this.jugadoresService.getJugador(this.authService.getUserData().email)
-    .then(resultado =>
-      {
-        this.jugador = resultado;
-      });*/
-    console.log(this.jugador);
+    if(this.authService.isLoggedIn())
+    {
+      //this.jugador = await this.jugadoresService.getJugador(this.authService.getUserData().email);
+      /*await this.jugadoresService.getJugador(this.authService.getUserData().email)
+      .then(resultado =>
+        {
+          this.jugador = resultado;
+        });*/
+        this.jugador = await this.jugadoresService.getJugador(this.authService.getUserData().email);//.forEach(unJugador =>
+        /*{
+          this.jugador = unJugador;
+        });*/
+      //console.info('this.jugador', this.jugador);
+    }
   }
 
   /*public getDatoJugador(atributo: string): string
@@ -95,9 +100,9 @@ console.log(this.jugador);*/
     return retorno;
   }
 
-  public salir(): void
+  public async salir(): Promise<void>
   {
-    this.jugadoresService.SignOut();
-    this.authService.SignOut();
+    await this.jugadoresService.SignOut();
+    await this.authService.SignOut();
   }
 }
