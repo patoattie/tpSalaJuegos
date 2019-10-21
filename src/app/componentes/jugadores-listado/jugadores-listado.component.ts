@@ -32,11 +32,11 @@ export class JugadoresListadoComponent implements OnInit {
     });*/
     if(this.authService.isLoggedIn())
     {
-      /*this.miJugadoresServicio.getJugadores().subscribe(
+      this.miJugadoresServicio.getJugadores().subscribe(
         listado => this.listado = listado,
         error => console.info(error)
-      );*/
-      this.listado = this.miJugadoresServicio.getJugadores();
+      );
+      //this.listado = this.miJugadoresServicio.getJugadores();
     }
   }
   /*TraerGanadores(){

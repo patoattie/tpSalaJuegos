@@ -14,9 +14,6 @@ export class JugadoresService {
 
   private jugadores: Observable<Jugador[]>;
   private jugadorCollection: AngularFirestoreCollection<any>;
-  //public jugadoresData: Jugador[];// = [];
-  //jugadorData: Jugador;
-  //private db: DocumentReference;
 
   constructor(private afs: AngularFirestore, private authService: AuthService) 
   { 
@@ -32,19 +29,10 @@ export class JugadoresService {
     );
   }
 
-  /*public async getJugadores(): Promise<Observable<Jugador[]>>
+  getJugadores(): Observable<Jugador[]>
   {
-    //return this.jugadores;
-    return await this.jugadorCollection.snapshotChanges().pipe(
-      map(actions => {
-        return actions.map(a => {
-          const data = a.payload.doc.data();
-          const idCollection = a.payload.doc.id;
-          return { idCollection, ...data };
-        });
-      })
-    );
-  }*/
+    return this.jugadores;
+  }
 
   getJugador(email: string): Jugador
   {
@@ -68,26 +56,8 @@ export class JugadoresService {
     }
 
     return retorno;
-    //return this.afs.collection('Jugadores').doc(this.authService.getUid()).valueChanges();
   }
 
-  /*private async poblarLocal(email: string): Promise<void>
-  {
-    await this.getJugadores().then(datos => 
-      {
-        datos.forEach(arrJugadores =>
-        {
-          arrJugadores.forEach(unJugador =>
-            {
-              if(unJugador.usuario == email)
-              {
-                localStorage.setItem('jugador', JSON.stringify(unJugador));
-              }
-            });
-        });
-      });
-  }*/
- 
   getJugadorPorId(idCollection: string): Observable<Jugador> 
   {
     return this.jugadorCollection.doc<any>(idCollection).valueChanges().pipe(
@@ -97,28 +67,6 @@ export class JugadoresService {
         return jugador
       })
     );
-  }
-
-  getJugadorPorUsuario(usuario: string): Observable<Jugador> 
-  {
-    let retorno;//: Observable<Jugador>;
-    /*return this.jugadorCollection.doc<any>(usuario).valueChanges().pipe(
-      take(1),
-      map(jugador => {
-        jugador.usuario = usuario;
-        return jugador
-      })
-    );*/
-    /*this.afs.collection('Jugadores').
-    .then(resultado =>
-      {
-        resultado.forEach(unJugador =>
-          {
-            retorno = unJugador;
-            //return unJugador;
-          });
-      });*/
-    return retorno;
   }
 
   addJugador(jugador: Jugador): Promise<void | DocumentReference> 

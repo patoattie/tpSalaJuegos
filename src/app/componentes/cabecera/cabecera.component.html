@@ -1,43 +1,6 @@
-<!-- <div class="panel panel-default">
-  <div class="hero-text">
-      <h1 style="font-size:50px">Sala de Juegos</h1>
-      <p>Patricio Attie</p>
-      <a href="https://github.com/patoattie"target="_blank">en GitHub <i class="fa fa-github"></i></a>
-      <a  routerLink="/QuienSoy" >Quien Soy? <i class="fa fa-user"></i></a>
-  </div>
-  <ul class="nav navbar-nav navbar-right">
-          <li><a routerLink="/Registro"><span class="glyphicon glyphicon-user"></span>Registrarse</a></li>
-          <li><a  routerLink="/Login"><span class="glyphicon glyphicon-log-in"></span> Ingresar</a></li>
-  </ul>
-</div> -->
-
-<!-- <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-  <a class="navbar-brand" href="#" *ngIf="!authService.isLoggedIn()">Sala de Juegos</a>
-  <a class="navbar-brand" href="#" *ngIf="authService.isLoggedIn()">{{authService.getUserData().email}}({{getDatoJugador('cuit')}}|{{getDatoJugador('sexo')}})</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="collapsibleNavbar">
-    <ul class="navbar-nav">
-      <li class="nav-item" *ngIf="!authService.isLoggedIn()"> -->
-        <!-- <a routerLink="/Registro"><span class="glyphicon glyphicon-user"></span>Registrarse</a> -->
-        <!-- <a class="nav-link" routerLink="/Registro">Registrarse</a>
-      </li>
-      <li class="nav-item" *ngIf="!authService.isLoggedIn()"> -->
-        <!-- <a routerLink="/Login"><span class="glyphicon glyphicon-log-in"></span> Ingresar</a> -->
-        <!-- <a class="nav-link" routerLink="/Login">Ingresar</a>
-      </li>
-      <li class="nav-item" *ngIf="authService.isLoggedIn()">
-          <a class="nav-link" (click)="authService.SignOut()">Salir</a>
-        </li>
-      </ul>
-  </div>  
-</nav> -->
-
 <p-toolbar>
   <div class="ui-toolbar-group-left">
     <label style="margin-right: 3em; font-size: large;" *ngIf="!authService.isLoggedIn()">Sala de Juegos</label>
-    <!-- <label style="margin-right: 3em; font-size: large;" *ngIf="authService.isLoggedIn() && this.jugador != null">{{authService.getUserData().email}}({{this.jugador.cuit}}|{{this.jugador.sexo}})</label> -->
     <label style="margin-right: 3em; font-size: large;" *ngIf="authService.isLoggedIn() && jugadoresService.getJugador(authService.getUserData().email) != null">{{authService.getUserData().email}}({{jugadoresService.getJugador(authService.getUserData().email).cuit}}|{{jugadoresService.getJugador(authService.getUserData().email).sexo}})</label>
   </div>
   <div class="ui-toolbar-group-right">
