@@ -3,6 +3,7 @@ import { AuthService } from '../../servicios/auth.service';
 import { JugadoresService } from '../../servicios/jugadores.service';
 import { Jugador } from '../../clases/jugador';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-cabecera',
@@ -13,7 +14,7 @@ export class CabeceraComponent implements OnInit {
   public jugadores: Jugador[] = [];
   public jugador: Jugador;
 
-  constructor(public authService: AuthService, public jugadoresService: JugadoresService, private afs: AngularFirestore) {this.leerJugador(); }
+  constructor(public authService: AuthService, public jugadoresService: JugadoresService, private afs: AngularFirestore, private location: Location) {this.leerJugador(); }
 
   ngOnInit() 
   {
@@ -55,5 +56,10 @@ export class CabeceraComponent implements OnInit {
   {
     await this.jugadoresService.SignOut();
     await this.authService.SignOut();
+  }
+
+  goBack(): void 
+  {
+    this.location.back();
   }
 }

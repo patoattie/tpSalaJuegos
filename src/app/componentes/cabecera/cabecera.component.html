@@ -1,5 +1,6 @@
 <p-toolbar>
   <div class="ui-toolbar-group-left">
+    <button pButton type="button" class="ui-button-secondary" icon="pi pi-arrow-left" (click)="goBack()" style="margin-right: .5em"></button>
     <label style="margin-right: 3em; font-size: large;" *ngIf="!authService.isLoggedIn()">Sala de Juegos</label>
     <label style="margin-right: 3em; font-size: large;" *ngIf="authService.isLoggedIn() && jugadoresService.getJugador(authService.getUserData().email) != null">{{authService.getUserData().email}}({{jugadoresService.getJugador(authService.getUserData().email).cuit}}|{{jugadoresService.getJugador(authService.getUserData().email).sexo}})</label>
   </div>
