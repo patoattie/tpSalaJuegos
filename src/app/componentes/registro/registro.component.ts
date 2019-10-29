@@ -121,4 +121,9 @@ export class RegistroComponent implements OnInit {
   {
     this.location.back();
   }
+
+  /*prueba()
+  {
+    console.log(this.formRegistro.value.sexo);
+  }*/
 }

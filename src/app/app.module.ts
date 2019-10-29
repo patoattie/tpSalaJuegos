@@ -48,13 +48,15 @@ import { InputJugadoresComponent } from './componentes/input-jugadores/input-jug
 import { SexoPipe } from './pipes/sexo.pipe';
 import { AuthService } from './servicios/auth.service';
 import { InicioComponent } from './componentes/inicio/inicio.component';
+import { PieComponent } from './componentes/pie/pie.component';
 
 //primeNG
 import {ToolbarModule} from 'primeng/toolbar';
 import {ButtonModule} from 'primeng/button';
 import {CardModule} from 'primeng/card';
-import { InputTextModule } from "primeng/inputtext";
-import { PieComponent } from './componentes/pie/pie.component';
+import {InputTextModule} from "primeng/inputtext";
+import {RadioButtonModule} from 'primeng/radiobutton';
+
 
 @NgModule({
   declarations: [
@@ -94,6 +96,7 @@ import { PieComponent } from './componentes/pie/pie.component';
     ButtonModule,
     CardModule,
     InputTextModule,
+    RadioButtonModule,
 /*    AgmCoreModule.forRoot({
       apiKey: 'AIzaSyB6f8x4IjRlesQ3oETc6BXYQHVRTOlY3Ys'
     }),*/

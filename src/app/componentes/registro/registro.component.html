@@ -16,25 +16,45 @@
     <form [formGroup]="formRegistro">
       <div class="container-fluid">
         <label><b>Email</b></label>
-        <input formControlName="usuario" type="text" placeholder="Ingresa tu correo" name="email" required>
-  
+        <!-- <input formControlName="usuario" type="text" placeholder="Ingresa tu correo" name="email" required> -->
+        <span class="ui-float-label">
+          <input formControlName="usuario" type="text" name="email" required pInputText> 
+          <label for="float-input">Ingresa tu correo</label>
+        </span>  
         <label><b>Clave</b></label>
-        <input formControlName="clave" type="password" placeholder="Aca la clave" name="psw" required>
+        <!-- <input formControlName="clave" type="password" placeholder="Aca la clave" name="psw" required> -->
+        <span class="ui-float-label">
+          <input formControlName="clave" type="password" name="psw" required pInputText> 
+          <label for="float-input">Aca la clave</label>
+        </span>  
   
         <label><b>Repita la clave</b></label>
-        <input formControlName="confirmaClave" type="password" placeholder="Aca repeti la misa clave  de arriba" name="psw-repeat" required>
+        <!-- <input formControlName="confirmaClave" type="password" placeholder="Aca repeti la misa clave  de arriba" name="psw-repeat" required> -->
+        <span class="ui-float-label">
+          <input formControlName="confirmaClave" type="password" name="psw-repeat" required pInputText> 
+          <label for="float-input">Aca repeti la misa clave de arriba</label>
+        </span>  
   
-        <label class="container">Masculino
+        <!-- <label class="container">Masculino
           <input formControlName="sexo" type="radio" checked value={{eSexo.masculino}}>
           <span class="checkmark"></span>
         </label>
         <label class="container">Femenino
           <input formControlName="sexo" type="radio" value={{eSexo.femenino}}>
           <span class="checkmark"></span>
-        </label>
+        </label> -->
                   
+        <div class="ui-g" style="width:250px;margin-bottom:10px">
+          <div class="ui-g-12"><p-radioButton name="sexo" formControlName="sexo" value={{eSexo.masculino}} label="Masculino"></p-radioButton></div>
+          <div class="ui-g-12"><p-radioButton name="sexo" formControlName="sexo" value={{eSexo.femenino}} label="Femenino"></p-radioButton></div>
+        </div>
+
         <label><b>Cuit</b></label>
-        <input formControlName="cuit" type="text" placeholder="Ingresa tu CUIT" name="email" required>
+        <!-- <input formControlName="cuit" type="text" placeholder="Ingresa tu CUIT" name="email" required> -->
+        <span class="ui-float-label">
+          <input formControlName="cuit" type="text" name="cuit" required pInputText> 
+          <label for="float-input">Ingresa tu CUIT</label>
+        </span>  
 
         <div class="clearfix">
           <button type="button" (click)="goBack()" class="cancelbtn">Me arrepenti</button>
