@@ -1,5 +1,38 @@
-<div class="container" >
-    <div class="card">
+<div class="ui-g" >
+  <div class="ui-g-12 ui-md-6 ui-lg-4 ui-xl-3">
+    <p-card header="Juego de agilidad mental" (click)="Juego('Agilidad')" styleClass="ui-card-shadow">
+      <p-header>
+        <img class="img-thumbnail"   src="./assets/imagenes/cerebro.jpg" alt="Avatar" style="width:100%">
+      </p-header>
+      <div>
+        <label style="font-size: xx-large; display: block; text-align: center;">Velocidad y agilidad aritmética</label>
+      </div>
+    </p-card>
+  </div>
+
+  <div class="ui-g-12 ui-md-6 ui-lg-4 ui-xl-3">
+    <p-card header="Juega contra la máquina" (click)="Juego('PPT')" styleClass="ui-card-shadow">
+      <p-header>
+        <img class="img-thumbnail" src="./assets/imagenes/ppt.jpg" alt="Avatar" style="width:100%">
+      </p-header>
+      <div>
+        <label style="font-size: xx-large; display: block; text-align: center;">Piedra Papel o Tijera</label>
+      </div>
+    </p-card>
+  </div>
+
+  <div class="ui-g-12 ui-md-6 ui-lg-4 ui-xl-3">
+    <p-card header="Juego de estrategia" (click)="Juego('Adivina')" styleClass="ui-card-shadow">
+      <p-header>
+        <img  class="img-thumbnail"  src="./assets/imagenes/adivina.png" alt="Avatar" style="width:100%">
+      </p-header>
+      <div>
+        <label style="font-size: xx-large; display: block; text-align: center;">Adivina el número secreto</label>
+      </div>
+    </p-card>
+  </div>
+
+  <!-- <div class="card">
       <img class="img-thumbnail"   src="./assets/imagenes/cerebro.jpg" alt="Avatar" style="width:100%">
       <h1>Velocidad y agilidad aritmética </h1>
       <p class="title">Juego de agilidad mental</p>
@@ -12,7 +45,7 @@
       <p>           <button class="button"  (click)="Juego('Agilidad')">Jugar</button></p>
     
     </div>
-  
+    
     <div class="card">
       <img class="img-thumbnail" src="./assets/imagenes/ppt.jpg" alt="Avatar" style="width:100%">
       <h1>Piedra Papel o Tijera</h1>
@@ -36,5 +69,5 @@
       <a href="#"><i class="fa fa-linkedin"></i></a> 
       <a href="#"><i class="fa fa-facebook"></i></a> 
       <p>           <button class="button"  (click)="Juego('Adivina')">Jugar</button></p>
-    </div>
+    </div> -->
   </div>

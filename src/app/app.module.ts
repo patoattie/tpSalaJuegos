@@ -54,6 +54,7 @@ import {ToolbarModule} from 'primeng/toolbar';
 import {ButtonModule} from 'primeng/button';
 import {CardModule} from 'primeng/card';
 import { InputTextModule } from "primeng/inputtext";
+import { PieComponent } from './componentes/pie/pie.component';
 
 @NgModule({
   declarations: [
@@ -80,7 +81,8 @@ import { InputTextModule } from "primeng/inputtext";
     JugadoresListadoComponent,
     InputJugadoresComponent,
     SexoPipe,
-    InicioComponent
+    InicioComponent,
+    PieComponent
   ],
   imports: [
     BrowserModule,
