@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../servicios/auth.service';
 import { JugadoresService } from '../../servicios/jugadores.service';
-import { Jugador } from '../../clases/jugador';
-import { AngularFirestore } from '@angular/fire/firestore';
 import { Location } from '@angular/common';
 
 @Component({
@@ -11,20 +9,20 @@ import { Location } from '@angular/common';
   styleUrls: ['./cabecera.component.css']
 })
 export class CabeceraComponent implements OnInit {
-  public jugadores: Jugador[] = [];
-  public jugador: Jugador;
+  //public jugadores: Jugador[] = [];
+  //public jugador: Jugador;
 
-  constructor(public authService: AuthService, public jugadoresService: JugadoresService, private afs: AngularFirestore, private location: Location) {this.leerJugador(); }
+  constructor(public authService: AuthService, public jugadoresService: JugadoresService, private location: Location) { }
 
   ngOnInit() 
   {
-    if(this.authService.isLoggedIn())
+    /*if(this.authService.isLoggedIn())
     {
        this.leerJugador();
-    }
+    }*/
   }
 
-  public async leerJugador(): Promise<void>
+  /*public async leerJugador(): Promise<void>
   {
     if(this.authService.isLoggedIn())
     {
@@ -50,12 +48,12 @@ export class CabeceraComponent implements OnInit {
     }
 
     return retorno;
-  }
+  }*/
 
-  public async salir(): Promise<void>
+  public salir(): void
   {
-    await this.jugadoresService.SignOut();
-    await this.authService.SignOut();
+    this.jugadoresService.SignOut();
+    this.authService.SignOut();
   }
 
   goBack(): void 

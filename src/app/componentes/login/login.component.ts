@@ -83,7 +83,7 @@ export class LoginComponent implements OnInit {
       if(usuarioValido)
       {
         //this.completarUsuario('blanquear');
-       await this.jugadoresService.getJugador(this.formLogin.value.usuario);
+       this.jugadoresService.getJugador(this.formLogin.value.usuario);
       }
     }
     else
